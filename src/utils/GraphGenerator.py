@@ -21,29 +21,35 @@ class GraphGenerator:
             avg_num_children :: Average number of children per couple, default 2
             reproductive_percentage :: Percent of population that procreates.
             avg_rate_infidelity :: Percentage of time individuals procreate w/o spouse.
-            fertility_start :: Age that nodes begin to reproduce
-            fertility_end :: Age that nodes stop reproducing
-
     """
 
     def very_simple_population_model(
+        self,
         num_nodes=100000,
-        initial_population=10000
+        initial_population=10000,
         avg_num_children=2.5,
         reproductive_percentage=0.8,
-        avg_rate_infidelity=0.1,
-        fertility_start=20,
-        fertility_end=45,
+        #avg_rate_infidelity=0.1,
+        #fertility_start=20,
+        #fertility_end=45,
     ):
         if initial_population > num_nodes:
             raise Exception("Initial population cannot exceed graph size")
 
         G = nx.Graph()
-        male, female = set(), set()
-
+        male, female, next_gen, cur_gen = set(), set(), set(), set(range(initial_population))
 
         ## Generate Initial Population
-        G.add_nodes_from(range(initial_population))
-        print(G.number_of_nodes())
+        G.add_nodes_from(cur_gen)
+        male |= set(range(initial_population//2))
+        female |= set(range(initial_population//2, initial_population))
+
+        while True:
+            ## Pop a male and female node
+            ## With probability [reproductive_percentage] continue
+            ## Remove from cur_gen
+            ## They have average (avg_num_children) kids, added to next_gen
+            ## If number of nodes > [num_nodes] return G
+
 
 a = GraphGenerator().very_simple_population_model()
