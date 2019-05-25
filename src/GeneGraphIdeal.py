@@ -19,6 +19,8 @@ We compute T(G, x, v) for every v in V_star, and combine the information from th
 distributions to identify the highest likelihood node in V.
 
 """
+
+
 class GeneGraphIdeal:
     def __init__(G, V_star, T):
         self.G = G
